@@ -545,6 +545,7 @@ def resize_norm_img(img,
     imgC, imgH, imgW = image_shape
     h = img.shape[0]
     w = img.shape[1]
+    padding = False
     if not padding:
         resized_image = cv2.resize(
             img, (imgW, imgH), interpolation=interpolation)

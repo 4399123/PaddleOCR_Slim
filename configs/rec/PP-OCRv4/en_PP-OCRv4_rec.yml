@@ -1,6 +1,6 @@
 Global:
   debug: false
-  use_gpu: false
+  use_gpu: true
   epoch_num: 300
   log_smooth_window: 20
   print_batch_step: 10
@@ -71,15 +71,15 @@ PostProcess:
 Metric:
   name: RecMetric
   main_indicator: acc
-  ignore_space: ture
+  ignore_space: true
 Train:
   dataset:
     name: MultiScaleDataSet
     ds_width: false
-    data_dir: ../../OCRDataSetV11/
+    data_dir: ../../OCRDataSetV1/
     ext_op_transform_idx: 1
     label_file_list:
-    - ../../OCRDataSetV11/rec/rec_gt_train.txt
+    - ../../OCRDataSetV1/rec/rec_gt_train.txt
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -111,7 +111,7 @@ Train:
 #      - 48
 #    - - 480
 #      - 48
-    first_bs: 32
+    first_bs: 16
     fix_bs: false
     divided_factor:
     - 8
@@ -119,15 +119,15 @@ Train:
     is_training: true
   loader:
     shuffle: true
-    batch_size_per_card: 32
+    batch_size_per_card: 16
     drop_last: true
     num_workers: 8
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: ../../OCRDataSetV11
+    data_dir: ../../OCRDataSetV1
     label_file_list:
-    - ../../OCRDataSetV11/rec/rec_gt_test.txt
+    - ../../OCRDataSetV1/rec/rec_gt_test.txt
     transforms:
     - DecodeImage:
         img_mode: BGR

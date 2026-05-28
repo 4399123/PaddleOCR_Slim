@@ -292,7 +292,7 @@ def main(model_config,export_model,save_inference_dir):
 if __name__ == "__main__":
 
     model_config=r'../configs/rec/PP-OCRv4/en_PP-OCRv4_rec.yml'
-    export_model=r'../output/rec_ppocr_v4_v30_5/best_accuracy'
+    export_model=r'../output/rec_ppocr_v4/best_accuracy'
     save_inference_dir=r'../inference/en_PP-OCRv4_rec_export/'
 
 
