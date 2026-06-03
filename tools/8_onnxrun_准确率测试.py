@@ -6,7 +6,7 @@ import onnxruntime as ort
 import numpy as np
 from imutils import paths
 import cv2
-
+from tools.ocr_dicts import en_dict
 #路径配置
 onnx_path=r'../inference/rec_onnx/best-smi.onnx'
 pic_path=r'D:\E\github_zl\OCRDataSetV1\rec\test'
@@ -14,8 +14,6 @@ pic_path=r'D:\E\github_zl\OCRDataSetV1\rec\test'
 # pic_path=r'./imgs'
 w,h=384,48
 
-#字典
-en_dict=['blank','0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '', '']
 #onnx模型载入
 model = onnx.load(onnx_path)
 onnx.checker.check_model(model)

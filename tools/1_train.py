@@ -222,7 +222,7 @@ def test_reader(config, device, logger):
 
 if __name__ == '__main__':
 
-    train_config=r'../configs/rec/PP-OCRv4/en_PP-OCRv4_rec.yml'
+    train_config=r'../configs/rec/PP-OCRv4/ch_PP-OCRv4_rec.yml'
     config, device, logger, vdl_writer = program.preprocess(is_train=True,train_config=train_config)
     seed = config['Global']['seed'] if 'seed' in config['Global'] else 1024
     set_seed(seed)

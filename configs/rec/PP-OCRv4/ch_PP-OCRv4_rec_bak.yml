@@ -1,61 +1,37 @@
 Global:
-#  debug: false
-#  use_gpu: true
-#  epoch_num: 200
-#  log_smooth_window: 20
-#  print_batch_step: 10
-#  save_model_dir: ./output/rec_ppocr_v4
-#  save_epoch_step: 10
-#  eval_batch_step: [0, 2000]
-#  cal_metric_during_train: true
-#  pretrained_model:
-#  checkpoints:
-#  save_inference_dir:
-#  use_visualdl: false
-#  infer_img: doc/imgs_words/ch/word_1.jpg
-#  character_dict_path: ppocr/utils/ppocr_keys_v1.txt
-#  max_text_length: &max_text_length 25
-#  infer_mode: false
-#  use_space_char: true
-#  distributed: true
-#  save_res_path: ./output/rec/predicts_ppocrv3.txt
   debug: false
   use_gpu: true
   epoch_num: 200
   log_smooth_window: 20
   print_batch_step: 10
-  save_model_dir: ../output/ch_rec_ppocr_v4
-  save_epoch_step: 99999999
-  eval_batch_step:
-  - 0
-  - 100
+  save_model_dir: ./output/rec_ppocr_v4
+  save_epoch_step: 10
+  eval_batch_step: [0, 2000]
   cal_metric_during_train: true
-  pretrained_model: ../pretrain_models/ch_PP-OCRv4_rec_train/student
-  checkpoints: null
-  save_inference_dir: null
-  use_visualdl: true
-  infer_img: ../doc/imgs_words/ch/word_1.jpg
-  character_dict_path: ../ppocr/utils/ppocr_keys_v1.txt
+  pretrained_model:
+  checkpoints:
+  save_inference_dir:
+  use_visualdl: false
+  infer_img: doc/imgs_words/ch/word_1.jpg
+  character_dict_path: ppocr/utils/ppocr_keys_v1.txt
   max_text_length: &max_text_length 25
   infer_mode: false
   use_space_char: true
   distributed: true
-  save_res_path: ../output/rec/predicts_ppocrv4.txt
-  use_sync_bn: false
-  use_amp: false
+  save_res_path: ./output/rec/predicts_ppocrv3.txt
+
 
 Optimizer:
-  name: AdamW
+  name: Adam
   beta1: 0.9
   beta2: 0.999
-
   lr:
     name: Cosine
-    learning_rate: 0.00012
+    learning_rate: 0.001
     warmup_epoch: 5
   regularizer:
     name: L2
-    factor: 5.0e-04
+    factor: 3.0e-05
 
 
 Architecture:
@@ -99,10 +75,10 @@ Train:
   dataset:
     name: MultiScaleDataSet
     ds_width: false
-    data_dir: ../../OCRDataSet_ChEngDig/
+    data_dir: ./train_data/
     ext_op_transform_idx: 1
     label_file_list:
-    - ../../OCRDataSet_ChEngDig/rec/rec_gt_train.txt
+    - ./train_data/train_list.txt
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -110,7 +86,7 @@ Train:
     - RecConAug:
         prob: 0.5
         ext_data_num: 2
-        image_shape: [48, 384, 3]
+        image_shape: [48, 320, 3]
         max_text_length: *max_text_length
     - RecAug:
     - MultiLabelEncode:
@@ -124,9 +100,8 @@ Train:
         - valid_ratio
   sampler:
     name: MultiScaleSampler
-#    scales: [[320, 32], [320, 48], [320, 64]]
-    scales: [ [384, 48]]
-    first_bs: &bs 16
+    scales: [[320, 32], [320, 48], [320, 64]]
+    first_bs: &bs 192
     fix_bs: false
     divided_factor: [8, 16] # w, h
     is_training: True
@@ -138,9 +113,9 @@ Train:
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: ../../OCRDataSet_ChEngDig
+    data_dir: ./train_data
     label_file_list:
-    - ../../OCRDataSet_ChEngDig/rec/rec_gt_test.txt
+    - ./train_data/val_list.txt
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -148,7 +123,7 @@ Eval:
     - MultiLabelEncode:
         gtc_encode: NRTRLabelEncode
     - RecResizeImg:
-        image_shape: [3, 48, 384]
+        image_shape: [3, 48, 320]
     - KeepKeys:
         keep_keys:
         - image
@@ -159,5 +134,5 @@ Eval:
   loader:
     shuffle: false
     drop_last: false
-    batch_size_per_card: 16
+    batch_size_per_card: 128
     num_workers: 4
