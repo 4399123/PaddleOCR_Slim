@@ -291,13 +291,13 @@ def main(model_config,export_model,save_inference_dir):
 
 if __name__ == "__main__":
     #英文模型
-    # model_config=r'../configs/rec/PP-OCRv4/en_PP-OCRv4_rec.yml'
-    # export_model=r'../output/rec_ppocr_v4/best_accuracy'
-    # save_inference_dir=r'../inference/en_PP-OCRv4_rec_export/'
+    model_config=r'../configs/rec/PP-OCRv4/en_PP-OCRv4_rec.yml'
+    export_model=r'../output/rec_ppocr_v4/best_accuracy'
+    save_inference_dir=r'../inference/en_PP-OCRv4_rec_export/'
 
     # #中文模型
-    model_config=r'../configs/rec/PP-OCRv4/ch_PP-OCRv4_rec.yml'
-    export_model=r'../output/ch_rec_ppocr_v4/best_accuracy'
-    save_inference_dir=r'../inference/ch_PP-OCRv4_rec_export/'
+    # model_config=r'../configs/rec/PP-OCRv4/ch_PP-OCRv4_rec.yml'
+    # export_model=r'../output/ch_rec_ppocr_v4/best_accuracy'
+    # save_inference_dir=r'../inference/ch_PP-OCRv4_rec_export/'
 
     main(model_config,export_model,save_inference_dir)

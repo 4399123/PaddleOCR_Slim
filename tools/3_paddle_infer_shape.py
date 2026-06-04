@@ -37,26 +37,26 @@ def infer_shape(program, input_shape_dict):
                 continue
             program.blocks[i].ops[j].desc.infer_shape(program.blocks[i].desc)
 #英文模型
-# def parse_arguments():
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument('--model_dir', default=r'../inference/en_PP-OCRv4_rec_export', help='Path of directory saved the input model.')
-#     parser.add_argument('--model_filename', default=r'inference.pdmodel', help='The input model file name.')
-#     parser.add_argument('--params_filename', default=r'inference.pdiparams', help='The parameters file name.')
-#     parser.add_argument('--save_dir', default=r'../inference/en_PP-OCRv4_rec_export_fixshape',
-#                         help='Path of directory to save the new exported model.')
-#     parser.add_argument('--input_shape_dict',default="{'x':[-1,3,48,384]}", help="The new shape information.")
-#     return parser.parse_args()
-
-#中文模型
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_dir', default=r'../inference/ch_PP-OCRv4_rec_export', help='Path of directory saved the input model.')
+    parser.add_argument('--model_dir', default=r'../inference/en_PP-OCRv4_rec_export', help='Path of directory saved the input model.')
     parser.add_argument('--model_filename', default=r'inference.pdmodel', help='The input model file name.')
     parser.add_argument('--params_filename', default=r'inference.pdiparams', help='The parameters file name.')
-    parser.add_argument('--save_dir', default=r'../inference/ch_PP-OCRv4_rec_export_fixshape',
+    parser.add_argument('--save_dir', default=r'../inference/en_PP-OCRv4_rec_export_fixshape',
                         help='Path of directory to save the new exported model.')
     parser.add_argument('--input_shape_dict',default="{'x':[-1,3,48,384]}", help="The new shape information.")
     return parser.parse_args()
+
+#中文模型
+# def parse_arguments():
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('--model_dir', default=r'../inference/ch_PP-OCRv4_rec_export', help='Path of directory saved the input model.')
+#     parser.add_argument('--model_filename', default=r'inference.pdmodel', help='The input model file name.')
+#     parser.add_argument('--params_filename', default=r'inference.pdiparams', help='The parameters file name.')
+#     parser.add_argument('--save_dir', default=r'../inference/ch_PP-OCRv4_rec_export_fixshape',
+#                         help='Path of directory to save the new exported model.')
+#     parser.add_argument('--input_shape_dict',default="{'x':[-1,3,48,384]}", help="The new shape information.")
+#     return parser.parse_args()
 
 if __name__ == '__main__':
     args = parse_arguments()
